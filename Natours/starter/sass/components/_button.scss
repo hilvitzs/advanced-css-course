@@ -1,0 +1,71 @@
+.btn {
+  /* state of button selector (pseudo class: style elements under certain condition) */
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+
+    /* short hand - which elements you want to transition and then the time */
+    /* always on the initial/base element */
+    transition: all 0.2s;
+
+    position: relative;
+    font-size: 1.6rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+
+    /* first - offset in the x direction */
+    /* second - offset in the y direction */
+    /* third - blur amount (higher is more) */
+    /* fourth - color of shadow */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  &::after {
+    content: '';
+    display: inline-block;
+
+    /* pseudo element is treated as a child of the element that it is coming after */
+    height: 100%;
+    width: 100%;
+
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    /* .5s = duration, .75s = delay */
+    animation: moveInBottom 0.5s ease-out 0.75s;
+
+    /* automatically applies initial styles (0%) before the animation starts */
+    animation-fill-mode: backwards;
+  }
+}

@@ -1,0 +1,21 @@
+// partial scss files are named starting with a _ by convention
+/* only * would not work with pseudo elements */
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* sets box-sizing to be inherited for all elements */
+  box-sizing: inherit;
+}
+
+html {
+  // This defines what 1rem is
+  // should not use pixels because if someone has increased or decreased their default font-size in the browser, it would be overridden
+  font-size: 62.5%;
+}
+
+body {
+  /* defining box-sizing here instead of in * makes it so that it's easier to change if you need to later on */
+  box-sizing: border-box;
+}
