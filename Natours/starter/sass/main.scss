@@ -4,6 +4,7 @@ $color-primary-dark: #28b485;
 
 $color-grey-dark: #777;
 $color-white: #fff;
+$color-black: #000;
 
 /* only * would not work with pseudo elements */
 *,
@@ -46,24 +47,24 @@ body {
   position: relative;
 
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-}
 
-.header__logo-box {
-  position: absolute;
-  top: 4rem;
-  left: 4rem;
-}
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
 
-.header__logo {
-  height: 3.5rem;
-}
+  &__logo {
+    height: 3.5rem;
+  }
 
-.header__text-box {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
 }
 
 .heading-primary {
@@ -73,29 +74,29 @@ body {
   /* to remove shaky ending of animation - hides part behind element */
   backface-visibility: hidden;
   margin-bottom: 6rem;
-}
 
-.heading-primary--main {
-  display: block;
-  font-size: 6rem;
-  font-weight: 400;
-  letter-spacing: 3.5rem;
+  &--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
 
-  animation: moveInLeft;
-  animation-duration: 1s;
-  animation-timing-function: ease-out;
-  
-  /* animation-iteration-count: 3; */
-  /* animation-delay: 3s;  */
-}
+    animation: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
 
-.heading-primary--sub {
-  display: block;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 1.75rem;
+    /* animation-iteration-count: 3; */
+    /* animation-delay: 3s;  */
+  }
 
-  animation: moveInRight 1s ease-out;
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+
+    animation: moveInRight 1s ease-out;
+  }
 }
 
 @keyframes moveInLeft {
@@ -142,72 +143,74 @@ body {
   }
 }
 
-/* state of button selector (pseudo class: style elements under certain condition) */
-.btn:link,
-.btn:visited { 
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 1.5rem 4rem;
-  display: inline-block;
-  border-radius: 10rem;
-  
-  /* short hand - which elements you want to transition and then the time */
-  /* always on the initial/base element */
-  transition: all .2s;
+.btn {
+  /* state of button selector (pseudo class: style elements under certain condition) */
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
 
-  position: relative;
-  font-size: 1.6rem;
-}
+    /* short hand - which elements you want to transition and then the time */
+    /* always on the initial/base element */
+    transition: all 0.2s;
 
-.btn:hover {
-  transform: translateY(-3px);
+    position: relative;
+    font-size: 1.6rem;
+  }
 
-  /* first - offset in the x direction */
-  /* second - offset in the y direction */
-  /* third - blur amount (higher is more) */
-  /* fourth - color of shadow */
-  box-shadow: 0 1rem 2rem rgba(0,0,0,.2);
-}
+  &:hover {
+    transform: translateY(-3px);
 
-.btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 .5rem 1rem rgba(0,0,0,.2);
-}
+    /* first - offset in the x direction */
+    /* second - offset in the y direction */
+    /* third - blur amount (higher is more) */
+    /* fourth - color of shadow */
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
 
-.btn--white {
-  background-color: $color-white;
-  color: $color-grey-dark;
-}
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
 
-.btn::after {
-  content: '';
-  display: inline-block;
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
 
-  /* pseudo element is treated as a child of the element that it is coming after */
-  height: 100%;
-  width: 100%;
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
 
-  border-radius: 10rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all .4s;
-}
+    &::after {
+      background-color: $color-white;
+    }
+  }
 
-.btn-white::after {
-  background-color: $color-white;
-}
+  &::after {
+    content: '';
+    display: inline-block;
 
-.btn:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
-}
+    /* pseudo element is treated as a child of the element that it is coming after */
+    height: 100%;
+    width: 100%;
 
-.btn--animated {
-  /* .5s = duration, .75s = delay */
-  animation: moveInBottom .5s ease-out .75s;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
 
-  /* automatically applies initial styles (0%) before the animation starts */
-  animation-fill-mode: backwards;
+  &--animated {
+    /* .5s = duration, .75s = delay */
+    animation: moveInBottom 0.5s ease-out 0.75s;
+
+    /* automatically applies initial styles (0%) before the animation starts */
+    animation-fill-mode: backwards;
+  }
 }
